@@ -24,7 +24,6 @@ import javax.swing.JTextField;
 import Lists.Lista;
 import Models.Administrador;
 public class Login {
-	
 	JFrame inicio=new JFrame();
 	Lista lista = new Lista();
 	public void inicio() {
@@ -63,7 +62,6 @@ public class Login {
 		titulo.setHorizontalAlignment(JLabel.CENTER);
 		titulo.setVerticalAlignment(JLabel.CENTER);
 		inicio.setLayout(new BorderLayout());
-		inicio.setSize(550, 600);
 		panel1.add(titulo);
 		panel1.add(login);
 		panel1.add(image2);
@@ -80,6 +78,7 @@ public class Login {
 		inicio.add(panel2, BorderLayout.CENTER);
 		inicio.add(panel1, BorderLayout.NORTH);
 		inicio.setVisible(true);
+		inicio.setSize(550, 600);
 		inicio.setLocationRelativeTo(null);
 	}
 	public void formularioLogin(){

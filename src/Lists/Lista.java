@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 import Models.Administrador;
 import Nodes.Nodo;
+import Views.MenuAdministrador;
 
 public class Lista {
 	private Nodo inicio;
@@ -26,6 +27,7 @@ public class Lista {
 		tamanio++;
 	}
 	public boolean login(String usernaeme, String password){
+		MenuAdministrador munuAdmin = new MenuAdministrador();
 		boolean ususuarioExistente=false;
 		Nodo aux = inicio;
 		while(aux!= null && ususuarioExistente != true){
@@ -33,6 +35,8 @@ public class Lista {
 				if(password.equals(aux.getAdministrador().getPassword())){
 					ususuarioExistente=true;
 					JOptionPane.showMessageDialog(null, "Bienvenido al sistema");
+					munuAdmin.setVisible(true);
+					munuAdmin.setLocationRelativeTo(null);
 				}else{
 					JOptionPane.showMessageDialog(null, "Contraseña Incorrecta");
 				}
