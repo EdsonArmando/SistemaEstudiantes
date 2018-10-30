@@ -11,7 +11,6 @@ import Views.Login;
 public class Main {
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		Login login = new Login();
-		Lista lista = new Lista();
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		login.inicio();
 	}
