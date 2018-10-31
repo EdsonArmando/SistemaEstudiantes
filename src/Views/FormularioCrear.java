@@ -7,6 +7,11 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Lists.ListaEstudiante;
+import Models.Estudiante;
+import Nodes.Nodo;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.SystemColor;
@@ -25,6 +30,9 @@ public class FormularioCrear extends JDialog {
 	private JTextField idContraenia;
 	private String nombre,correo;
 	private int carne,cui,noCreditos,contrasenia;
+	Nodo nodo = new Nodo();
+	ListaEstudiante listaEstudiante = new ListaEstudiante();
+	Estudiante estudiante;
 	public FormularioCrear() {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
@@ -123,7 +131,9 @@ public class FormularioCrear extends JDialog {
 				correo = idCorreo.getText();
 				noCreditos = Integer.parseInt(idCreditos.getText());
 				contrasenia = Integer.parseInt(idContraenia.getText());
-				System.out.println(carne+"\n"+cui+"\n"+nombre+"\n"+correo+"\n"+noCreditos+"\n"+contrasenia);
+				estudiante = new Estudiante(carne,cui,nombre,correo,noCreditos,contrasenia);
+				listaEstudiante.insertarEstudiante(estudiante);
+				listaEstudiante.imprimir();
 			}
 		});
 		btnAceptar_1.setBounds(250, 177, 89, 23);

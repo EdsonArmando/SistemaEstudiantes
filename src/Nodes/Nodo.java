@@ -48,4 +48,7 @@ public class Nodo {
 	public Nodo(Estudiante estudiante){
 		this.estudiante = estudiante;
 	}
+	public Nodo(){
+		
+	}
 }

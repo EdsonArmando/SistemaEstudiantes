@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 
 public class MenuAdministrador extends JDialog {
 	AdministrarEstudiantes adminEstudiantes = new AdministrarEstudiantes();
+	FormularioCatedratico formCatedratico = new FormularioCatedratico();
 	JDialog dialogMaster;
 	public MenuAdministrador() {
 		getContentPane().setEnabled(false);
@@ -97,6 +98,15 @@ public class MenuAdministrador extends JDialog {
 		JButton btnAgregarUsuario = new JButton("Agregar");
 		btnAgregarUsuario.setBounds(65, 46, 111, 23);
 		dialogMaster.getContentPane().add(btnAgregarUsuario);
+		btnAgregarUsuario.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				formCatedratico.setVisible(true);
+				formCatedratico.setResizable(false);
+				formCatedratico.setLocationRelativeTo(null);
+			}
+			
+		});
 		
 		JButton btnNewButton = new JButton("Modificar");
 		btnNewButton.addActionListener(new ActionListener() {
