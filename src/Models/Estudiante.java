@@ -2,7 +2,7 @@ package Models;
 
 public class Estudiante {
 	private int carne;
-	private int cui;
+	private String cui;
 	private String nombre;
 	private String correo;
 	private int noCreditos;
@@ -13,10 +13,10 @@ public class Estudiante {
 	public void setCarne(int carne) {
 		this.carne = carne;
 	}
-	public int getCui() {
+	public String getCui() {
 		return cui;
 	}
-	public void setCui(int cui) {
+	public void setCui(String cui) {
 		this.cui = cui;
 	}
 	public String getNombre() {
@@ -43,7 +43,7 @@ public class Estudiante {
 	public void setContrasenia(int contrasenia) {
 		this.contrasenia = contrasenia;
 	}
-	public Estudiante(int carne, int cui, String nombre, String correo, int noCreditos, int contrasenia) {
+	public Estudiante(int carne, String cui, String nombre, String correo, int noCreditos, int contrasenia) {
 		super();
 		this.carne = carne;
 		this.cui = cui;
