@@ -22,7 +22,7 @@ import Nodes.NodoEstudiante;
 public class FormularioModificar {
 	ListaEstudiante listaEstudiante = new ListaEstudiante();
 	private String nombre,correo,cui;
-	private int carne,noCreditos,contrasenia;
+	private int carnee,noCreditos,contrasenia;
 	private NodoEstudiante primero = listaEstudiante.getPrimero();
 	private NodoEstudiante ultimo = listaEstudiante.getUltimo();
 	JTextField idCarne;
@@ -143,23 +143,13 @@ public class FormularioModificar {
 				nombre = idNombre.getText();
 				correo = idCorreo.getText();
 				try{
-					carne = Integer.parseInt(idCarne.getText());
+					carnee = Integer.parseInt(idCarne.getText());
 					noCreditos = Integer.parseInt(idCreditos.getText());
 					contrasenia = Integer.parseInt(idContraenia.getText());
 				}catch( java.lang.NumberFormatException es){
 					JOptionPane.showMessageDialog(null, "LLene los campos");
 				}
-				do{
-					if(primero.getEstudiante().getCarne()==carne){
-						primero.getEstudiante().setNombre(nombre);
-						primero.getEstudiante().setCarne(carne);
-						primero.getEstudiante().setCui(cui);
-						primero.getEstudiante().setNoCreditos(noCreditos);
-						primero.getEstudiante().setCorreo(correo);
-						primero.getEstudiante().setContrasenia(contrasenia);
-					}
-					primero = primero.Anterior;
-				}while(primero !=ultimo);
+				listaEstudiante.modificarEstudiante(carnet,carnee, cui, nombre, noCreditos, correo, contrasenia);
 			}
 		});
 		

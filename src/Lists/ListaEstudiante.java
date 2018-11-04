@@ -112,12 +112,17 @@ public class ListaEstudiante {
 		uno.setVisible(true);
 		uno.setLocationRelativeTo(null);
 	}
-	public void buscar(int carne){
+	public void modificarEstudiante(int carnet,int carnee,String cui, String nombre,int noCreditos,String correo,int contrasenia){
 		NodoEstudiante actual = new NodoEstudiante();
 		actual = ultimo;
 		do{
-			if(actual.getEstudiante().getCarne()==carne){
-				System.out.println(actual.getEstudiante().getNombre());
+			if(actual.getEstudiante().getCarne()==carnet){
+				actual.getEstudiante().setNombre(nombre);
+				actual.getEstudiante().setCarne(carnee);
+				actual.getEstudiante().setCui(cui);
+				actual.getEstudiante().setNoCreditos(noCreditos);
+				actual.getEstudiante().setCorreo(correo);
+				actual.getEstudiante().setContrasenia(contrasenia);
 			}
 			actual = actual.Anterior;
 		}while(actual !=ultimo);
