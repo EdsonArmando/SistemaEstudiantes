@@ -1,4 +1,4 @@
-package Views;
+package Views.Estudiante;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -26,7 +26,6 @@ import java.awt.event.ActionEvent;
 public class FormularioCrear{
 	private String nombre,correo,cui;
 	private int carne,noCreditos,contrasenia;
-	Nodo nodo = new Nodo();
 	ListaEstudiante listaEstudiante = new ListaEstudiante();
 	Estudiante estudiante;
 	public void formulario2(){

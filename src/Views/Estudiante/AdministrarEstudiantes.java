@@ -1,4 +1,4 @@
-package Views;
+package Views.Estudiante;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -43,6 +43,10 @@ public class AdministrarEstudiantes extends JDialog {
 		JButton btnNewButton = new JButton("Modificar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ListadoModificar modificar = new ListadoModificar();
+				modificar.setVisible(true);
+				modificar.setLocationRelativeTo(null);
+				modificar.setResizable(false);
 			}
 		});
 		btnNewButton.setBounds(65, 97, 111, 23);
@@ -67,10 +71,10 @@ public class AdministrarEstudiantes extends JDialog {
 				eliminar.setVisible(true);
 				eliminar.setLocationRelativeTo(null);
 				eliminar.setResizable(false);
-				String carne = JOptionPane.showInputDialog(null, "Ingrese el Pasaporte del usuario: ",
+				/*String carne = JOptionPane.showInputDialog(null, "Ingrese el Pasaporte del usuario: ",
 						JOptionPane.QUESTION_MESSAGE);
 				int carnes = Integer.parseInt(carne);
-				lista.eliminarEstudiante(carnes);
+				lista.eliminarEstudiante(carnes);*/
 			}
 		});
 		btnEliminar.setBounds(256, 97, 111, 23);

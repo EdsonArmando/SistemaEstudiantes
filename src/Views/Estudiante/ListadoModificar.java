@@ -1,8 +1,6 @@
-package Views;
+package Views.Estudiante;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
@@ -15,18 +13,22 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.border.EmptyBorder;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import Lists.ListaEstudiante;
 import Nodes.NodoEstudiante;
 
-public class EliminarEstudiante extends JDialog {
+public class ListadoModificar extends JDialog{
 	ListaEstudiante lista = new ListaEstudiante();
 	private NodoEstudiante primero = lista.getPrimero();
 	private final JPanel contentPanel = new JPanel();
 	private JTable tabla;
-	public EliminarEstudiante() {
+	private int carne;
+	FormularioModificar modificar = new FormularioModificar();
+	public ListadoModificar() {
 		DefaultTableModel modelo = new DefaultTableModel();
 		 modelo.addColumn("Carne");
 		 modelo.addColumn("CUI");
@@ -55,7 +57,20 @@ public class EliminarEstudiante extends JDialog {
 			 JScrollPane scroll = new JScrollPane(tabla);
 			 scroll.setSize(414, 100);
 			 scroll.setLocation(10, 96);
-			 
+			 tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+
+					@Override
+					public void valueChanged(ListSelectionEvent e) {
+						int fila = tabla.getSelectedRowCount();
+						if(fila==1){
+							int row = tabla.getSelectedRow();
+							Object carnes = tabla.getValueAt(row, 0);
+							 carne = (Integer)carnes;
+						}
+					}
+					
+				});;
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 		
@@ -63,16 +78,16 @@ public class EliminarEstudiante extends JDialog {
 		tabla.setBounds(10, 125, 414, 100);
 		getContentPane().add(scroll);
 		
-		JLabel lblListadoDeUsuaros = new JLabel("Listado de Estudiantes");
+		JLabel lblListadoDeUsuaros = new JLabel("Eliminar Estudiantes");
 		lblListadoDeUsuaros.setForeground(SystemColor.activeCaptionBorder);
 		lblListadoDeUsuaros.setFont(new Font("Calibri Light", Font.PLAIN, 18));
 		lblListadoDeUsuaros.setBounds(144, 26, 172, 23);
 		getContentPane().add(lblListadoDeUsuaros);
 		
-		JButton btnSalir = new JButton("Salir");
+		JButton btnSalir = new JButton("Modificar");
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+					modificar.modificar(carne);
 			}
 		});
 		btnSalir.setBounds(335, 207, 89, 23);

@@ -1,4 +1,4 @@
-package Views;
+package Views.Estudiante;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
