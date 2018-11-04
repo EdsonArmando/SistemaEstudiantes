@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.SwingConstants;
 
+import Views.Catedratico.FormularioCatedratico;
 import Views.Estudiante.AdministrarEstudiantes;
 
 import java.awt.Font;
@@ -104,9 +105,7 @@ public class MenuAdministrador extends JDialog {
 		btnAgregarUsuario.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				formCatedratico.setVisible(true);
-				formCatedratico.setResizable(false);
-				formCatedratico.setLocationRelativeTo(null);
+				formCatedratico.formularioCrear();
 			}
 			
 		});
