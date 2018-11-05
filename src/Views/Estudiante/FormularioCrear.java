@@ -103,7 +103,7 @@ public class FormularioCrear{
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				idContraenia.setText("123456789");
+				idContraenia.setText(contrasenia(idCarne.getText(),IdCui.getText()));
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -175,6 +175,13 @@ public class FormularioCrear{
 				JOptionPane.showMessageDialog(null, "Ingrese correctamente el cui o carne " );
 			}
 		return resultado;
+	}
+	private static String contrasenia(String carneess, String cui){
+		String uno = String.valueOf(carneess.charAt(5))+String.valueOf(carneess.charAt(6))+
+		String.valueOf(carneess.charAt(7))+String.valueOf(carneess.charAt(8));
+		String dos = String.valueOf(cui.charAt(0))+String.valueOf(cui.charAt(1));
+		String contra=uno+dos;
+		return contra;
 	}
 	private static boolean esNumerico(String identificador){
 		boolean uno = false;
