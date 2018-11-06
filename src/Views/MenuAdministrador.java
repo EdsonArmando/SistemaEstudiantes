@@ -7,8 +7,10 @@ import javax.swing.JDialog;
 import javax.swing.SwingConstants;
 
 import Lists.ListaCatedratico;
+import Views.Catedratico.EliminacionCatedratico;
 import Views.Catedratico.FormularioCatedratico;
 import Views.Catedratico.ListaCatedraticos;
+import Views.Catedratico.MoificarCatedratico;
 import Views.Estudiante.AdministrarEstudiantes;
 import Views.Estudiante.ListadoEstudiantes;
 
@@ -116,6 +118,10 @@ public class MenuAdministrador extends JDialog {
 		JButton btnNewButton = new JButton("Modificar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				MoificarCatedratico modificar = new MoificarCatedratico();
+				modificar.setVisible(true);
+				modificar.setLocationRelativeTo(null);
+				modificar.setResizable(false);
 			}
 		});
 		btnNewButton.setBounds(65, 97, 111, 23);
@@ -135,6 +141,17 @@ public class MenuAdministrador extends JDialog {
 		
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.setBounds(256, 97, 111, 23);
+		btnEliminar.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				EliminacionCatedratico eliminar = new EliminacionCatedratico();
+				eliminar.setVisible(true);
+				eliminar.setLocationRelativeTo(null);
+				eliminar.setResizable(false);
+			}
+			
+		});
 		dialogMaster.getContentPane().add(btnEliminar);
 		dialogMaster.setBounds(100, 100, 453, 203);
 		dialogMaster.setLocationRelativeTo(null);

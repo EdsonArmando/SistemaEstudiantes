@@ -19,16 +19,19 @@ import javax.swing.border.EmptyBorder;
 
 import Lists.ListaCatedratico;
 import Models.Catedratico;
+import Nodes.NodoCatedratico;
+import Nodes.NodoEstudiante;
 
-public class FormularioCatedratico {
+public class FormularioModificar extends JDialog {
 	private JTextField IdCui;
 	private JTextField idNombre;
 	private JTextField idCorreo;
 	private JTextField idContraenia;
 	ListaCatedratico lista = new ListaCatedratico();
-	public void formularioCrear(){
+	private NodoCatedratico primero = lista.getPrimero();
+	private NodoCatedratico ultimo = lista.getUltimo();
+	public void formularioModificars(String cui) {
 		JDialog uno = new JDialog();
-		
 		JLabel lblNewLabel = new JLabel("Ingreso de Catedráticos");
 		lblNewLabel.setForeground(SystemColor.activeCaptionBorder);
 		lblNewLabel.setFont(new Font("Calibri Light", Font.PLAIN, 16));
@@ -50,20 +53,26 @@ public class FormularioCatedratico {
 		JLabel lblNewLabel_4 = new JLabel("Contraseña");
 		lblNewLabel_4.setBounds(45, 160, 56, 14);
 		uno.add(lblNewLabel_4);
-		
+		NodoCatedratico actual = new NodoCatedratico();
+		actual=primero;
+		do{
+			if(actual.getCatedratico().getCui().equals(cui)){
 		IdCui = new JTextField();
 		IdCui.setBounds(135, 52, 86, 20);
 		uno.add(IdCui);
+		IdCui.setText(actual.getCatedratico().getCui());
 		IdCui.setColumns(10);
 		
 		idNombre = new JTextField();
 		idNombre.setBounds(135, 87, 86, 20);
 		uno.add(idNombre);
+		idNombre.setText(actual.getCatedratico().getNombre());
 		idNombre.setColumns(10);
 		
 		idCorreo = new JTextField();
 		idCorreo.setBounds(135, 122, 86, 20);
 		uno.add(idCorreo);
+		idCorreo.setText(actual.getCatedratico().getCorreo());
 		idCorreo.setColumns(10);
 		
 		idContraenia = new JTextField();
@@ -100,9 +109,13 @@ public class FormularioCatedratico {
 			}
 			
 		});
+		idContraenia.setText(actual.getCatedratico().getContrasenia());
 		idContraenia.setBounds(135, 157, 86, 20);
 		uno.add(idContraenia);
 		idContraenia.setColumns(10);
+			}
+			actual = actual.siguiente;
+		}while(actual!=primero);
 		JButton btnAceptar = new JButton("Cancelar");
 		btnAceptar.setBounds(145, 198, 89, 23);
 		btnAceptar.addActionListener(new ActionListener(){
@@ -118,13 +131,14 @@ public class FormularioCatedratico {
 		JButton btnAceptar_1 = new JButton("Aceptar");
 		btnAceptar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 String nombre=idNombre.getText(),correo=idCorreo.getText(),cui=IdCui.getText();
+				 String nombre=idNombre.getText(),correo=idCorreo.getText(),cui2=IdCui.getText();
 				 String contrasenia=contrasenia(cui,nombre);
-				 Catedratico catedratico = new Catedratico(cui,nombre,correo,contrasenia);
+				 
 				 if(nombre.equals("")||cui.equals("")||correo.equals("")||contrasenia.equals("")){
 					 JOptionPane.showMessageDialog(null, "LLene todos los campos");
 				 }else if(cui.length()==13){
-					 lista.ingresarCatedratico(catedratico);
+					 lista.modificarCatedratico(cui, cui2, nombre, correo, contrasenia);
+					 JOptionPane.showMessageDialog(null, "Modificacion Correcta");
 				 }else{
 					 JOptionPane.showMessageDialog(null, "Ingrese correctamen el cui");
 				 }
@@ -153,4 +167,3 @@ public class FormularioCatedratico {
 		return contra;
 	}
 }
-

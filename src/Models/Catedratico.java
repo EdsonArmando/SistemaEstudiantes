@@ -4,7 +4,7 @@ public class Catedratico {
 	private String cui;
 	private String nombre;
 	private String correo;
-	private int contrasenia;
+	private String contrasenia;
 	public String getCui() {
 		return cui;
 	}
@@ -23,13 +23,13 @@ public class Catedratico {
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
-	public int getContrasenia() {
+	public String getContrasenia() {
 		return contrasenia;
 	}
-	public void setContrasenia(int contrasenia) {
+	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
 	}
-	public Catedratico(String cui, String nombre, String correo, int contrasenia) {
+	public Catedratico(String cui, String nombre, String correo, String contrasenia) {
 		super();
 		this.cui = cui;
 		this.nombre = nombre;

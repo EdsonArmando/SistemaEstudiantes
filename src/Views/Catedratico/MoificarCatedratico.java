@@ -15,19 +15,21 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import Lists.ListaCatedratico;
-import Lists.ListaEstudiante;
 import Nodes.NodoCatedratico;
-import Nodes.NodoEstudiante;
 
-public class ListaCatedraticos extends JDialog {
+public class MoificarCatedratico extends JDialog {
 	ListaCatedratico lista = new ListaCatedratico();
 	private NodoCatedratico primero = lista.getPrimero();
 	private JTable tabla;
-	public ListaCatedraticos() {
+	private String cui;
+	public MoificarCatedratico() {
 		DefaultTableModel modelo = new DefaultTableModel();
 		modelo.addColumn("Cui");
 		modelo.addColumn("Nombre");
@@ -51,6 +53,20 @@ public class ListaCatedraticos extends JDialog {
 			 JScrollPane scroll = new JScrollPane(tabla);
 			 scroll.setSize(414, 100);
 			 scroll.setLocation(10, 96);
+			 tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+
+					@Override
+					public void valueChanged(ListSelectionEvent e) {
+						int fila = tabla.getSelectedRowCount();
+						if(fila==1){
+							int row = tabla.getSelectedRow();
+							Object cuis = tabla.getValueAt(row, 0);
+							 cui = (String)cuis;
+						}
+					}
+					
+				});;
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 
@@ -63,14 +79,16 @@ public class ListaCatedraticos extends JDialog {
 		lblListadoDeUsuaros.setBounds(144, 26, 172, 23);
 		getContentPane().add(lblListadoDeUsuaros);
 		
-		JButton btnSalir = new JButton("Salir");
+		JButton btnSalir = new JButton("Modificar");
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+				FormularioModificar form = new FormularioModificar();
+				form.formularioModificars(cui);
 			}
 		});
 		btnSalir.setBounds(335, 207, 89, 23);
 		getContentPane().add(btnSalir);
 	}
+
 
 }

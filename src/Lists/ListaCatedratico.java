@@ -21,6 +21,13 @@ public class ListaCatedratico {
 	public static void setPrimero(NodoCatedratico primero) {
 		ListaCatedratico.primero = primero;
 	}
+	
+	public static NodoCatedratico getUltimo() {
+		return ultimo;
+	}
+	public static void setUltimo(NodoCatedratico ultimo) {
+		ListaCatedratico.ultimo = ultimo;
+	}
 	public static void ingresarCatedratico(Catedratico catedratico){
 		NodoCatedratico nuevo = new NodoCatedratico(catedratico);
 		if(primero ==null){
@@ -34,5 +41,39 @@ public class ListaCatedratico {
 			ultimo=nuevo;
 			JOptionPane.showMessageDialog(null, "Catedrático ingresado exitosamente");
 		}
+	}
+	public static void eliminar(String cui){
+		NodoCatedratico actual = new NodoCatedratico();
+		NodoCatedratico anterior = new NodoCatedratico();
+		actual = primero;
+		anterior = ultimo;
+		do{
+			if(actual.getCatedratico().getCui().equals(cui)){
+				if(actual==primero){
+					primero = primero.siguiente;
+					ultimo.siguiente=primero;
+				}else if(actual ==ultimo){
+					anterior.siguiente=ultimo.siguiente;
+					ultimo=anterior;
+				}else{
+					anterior.siguiente=actual.siguiente;
+				}
+			}
+			anterior = actual;
+			actual = actual.siguiente;
+		}while(actual!=primero);
+	}
+	public static void modificarCatedratico(String cui,String cui2,String nombre,String correo,String contra){
+		NodoCatedratico actual = new NodoCatedratico();
+		actual=primero;
+		do{
+			if(actual.getCatedratico().getCui().equals(cui)){
+				actual.getCatedratico().setCui(cui2);
+				actual.getCatedratico().setNombre(nombre);
+				actual.getCatedratico().setCorreo(correo);
+				actual.getCatedratico().setContrasenia(contra);
+			}
+			actual = actual.siguiente;
+		}while(actual!=primero);
 	}
 }
