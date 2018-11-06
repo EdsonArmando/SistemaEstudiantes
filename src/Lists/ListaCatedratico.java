@@ -1,6 +1,12 @@
 package Lists;
 
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import Models.Catedratico;
 import Nodes.NodoCatedratico;
@@ -8,6 +14,13 @@ import Nodes.NodoCatedratico;
 public class ListaCatedratico {
 	static NodoCatedratico primero;
 	static NodoCatedratico ultimo;
+	
+	public  NodoCatedratico getPrimero() {
+		return primero;
+	}
+	public static void setPrimero(NodoCatedratico primero) {
+		ListaCatedratico.primero = primero;
+	}
 	public static void ingresarCatedratico(Catedratico catedratico){
 		NodoCatedratico nuevo = new NodoCatedratico(catedratico);
 		if(primero ==null){
@@ -21,18 +34,5 @@ public class ListaCatedratico {
 			ultimo=nuevo;
 			JOptionPane.showMessageDialog(null, "Catedrático ingresado exitosamente");
 		}
-		mostrarLista();
-	}
-	public static void mostrarLista(){
-		NodoCatedratico actual = new NodoCatedratico();
-		actual=primero;
-		do{
-			System.out.println(actual.getCatedratico().getNombre());
-			actual = actual.siguiente;
-		}while(actual!=primero);
-	}
-	public void lista(){
-		primero =null;
-		ultimo=null;
 	}
 }

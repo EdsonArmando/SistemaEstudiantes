@@ -17,15 +17,20 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Lists.Lista;
+import Lists.ListaEstudiante;
 import Models.Administrador;
+import Views.Estudiante.MenuEstudiante;
 public class Login {
 	JFrame inicio=new JFrame();
 	Lista lista = new Lista();
+	ListaEstudiante listaEstudinate = new ListaEstudiante();
+	MenuEstudiante menu = new MenuEstudiante();
 	public void inicio() {
 		Administrador admin = new Administrador("admin","admin","admin");
 		lista.agregarNodo(admin);
@@ -113,7 +118,17 @@ public class Login {
 				String password;
 				String username = user.getText();
 				password = contra.getText();
-				lista.login(username, password);
+				boolean verificar = esEntero(username);
+				if(verificar==true){
+					boolean loginEstu=ListaEstudiante.loginEstudiante(username, password);
+					if(loginEstu==true){
+						menu.MenuEstudiante();
+					}else{
+						JOptionPane.showMessageDialog(null,"Verifique sus credenciales");
+					}
+				}else{
+					lista.login(username, password);
+				}
 			}
 		});
 		aceptar.setBounds(200, 20, 80, 20);
@@ -130,6 +145,16 @@ public class Login {
 		ventanaLogin.setVisible(true);
 		ventanaLogin.setSize(300, 150);
 		ventanaLogin.setLocationRelativeTo(null);
-
 	}
+	public static boolean esEntero(String carnet) {
+		boolean resultado;
+		try {
+			Integer.parseInt(carnet);
+			resultado = true;
+		} catch (NumberFormatException excepcion) {
+			resultado = false;
+		}
+		return resultado;
+	}
+
 }

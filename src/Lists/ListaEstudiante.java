@@ -7,6 +7,7 @@ import java.awt.SystemColor;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -17,8 +18,8 @@ import Nodes.Nodo;
 import Nodes.NodoEstudiante;
 
 public class ListaEstudiante {
-	static NodoEstudiante primero;
-	static NodoEstudiante ultimo;
+	static NodoEstudiante primero=null;
+	static NodoEstudiante ultimo=null;
 	static int tamanio = 0;
 
 	public NodoEstudiante getPrimero() {
@@ -26,10 +27,6 @@ public class ListaEstudiante {
 	}
 	public NodoEstudiante getUltimo() {
 		return ultimo;
-	}
-	public void Lista() {
-		this.primero = null;
-		this.ultimo = null;
 	}
 
 	public static void insertarEstudiante(Estudiante estudiante) {
@@ -126,6 +123,26 @@ public class ListaEstudiante {
 			}
 			actual = actual.Anterior;
 		}while(actual !=ultimo);
-		
+	}
+	
+	public static boolean loginEstudiante(String carne,String contrasenia){
+		boolean verdadero = false;
+		int carnet = Integer.parseInt(carne);
+		int contra = Integer.parseInt(contrasenia);
+		System.out.println(carnet);
+		System.out.println(contra);
+		NodoEstudiante actual = new NodoEstudiante();
+		actual = ultimo;
+		do{
+			try{
+				if(actual.getEstudiante().getCarne()==carnet&&actual.getEstudiante().getContrasenia()==contra){
+					verdadero =true;
+			}
+			actual = actual.Anterior;
+			}catch( java.lang.NullPointerException ex){
+				JOptionPane.showMessageDialog(null, "No existe ningun estudiante");
+			}
+		}while(actual !=ultimo);
+		return verdadero;
 	}
 }

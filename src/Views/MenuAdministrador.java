@@ -6,8 +6,11 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.SwingConstants;
 
+import Lists.ListaCatedratico;
 import Views.Catedratico.FormularioCatedratico;
+import Views.Catedratico.ListaCatedraticos;
 import Views.Estudiante.AdministrarEstudiantes;
+import Views.Estudiante.ListadoEstudiantes;
 
 import java.awt.Font;
 import java.awt.SystemColor;
@@ -121,6 +124,10 @@ public class MenuAdministrador extends JDialog {
 		JButton btnNewButton_1 = new JButton("Visualizar");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ListaCatedraticos listaNueva = new ListaCatedraticos();
+				listaNueva.setVisible(true);
+				listaNueva.setLocationRelativeTo(null);
+				listaNueva.setResizable(false);
 			}
 		});
 		btnNewButton_1.setBounds(256, 46, 111, 23);

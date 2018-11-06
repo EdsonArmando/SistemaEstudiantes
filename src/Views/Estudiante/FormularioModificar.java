@@ -108,7 +108,7 @@ public class FormularioModificar {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				idContraenia.setText("123456789");
+				idContraenia.setText(contrasenia(idCarne.getText(),IdCui.getText()));
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -152,7 +152,7 @@ public class FormularioModificar {
 				listaEstudiante.modificarEstudiante(carnet,carnee, cui, nombre, noCreditos, correo, contrasenia);
 			}
 		});
-		
+
 		btnAceptar_1.setBounds(250, 177, 89, 23);
 		panelUsuario.add(btnAceptar_1);
 		dialogUsuario.add(panelUsuario);
@@ -160,5 +160,12 @@ public class FormularioModificar {
 		dialogUsuario.setSize(450, 350);
 		dialogUsuario.setVisible(true);
 		dialogUsuario.setLocationRelativeTo(null);
+	}
+	private static String contrasenia(String carneess, String cui){
+		String uno = String.valueOf(carneess.charAt(5))+String.valueOf(carneess.charAt(6))+
+		String.valueOf(carneess.charAt(7))+String.valueOf(carneess.charAt(8));
+		String dos = String.valueOf(cui.charAt(0))+String.valueOf(cui.charAt(1));
+		String contra=uno+dos;
+		return contra;
 	}
 }
