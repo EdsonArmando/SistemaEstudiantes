@@ -23,14 +23,18 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Lists.Lista;
+import Lists.ListaCatedratico;
 import Lists.ListaEstudiante;
 import Models.Administrador;
+import Views.Catedratico.MenuCatedratico;
 import Views.Estudiante.MenuEstudiante;
 public class Login {
 	JFrame inicio=new JFrame();
 	Lista lista = new Lista();
 	ListaEstudiante listaEstudinate = new ListaEstudiante();
+	ListaCatedratico lista2 = new ListaCatedratico();
 	MenuEstudiante menu = new MenuEstudiante();
+	MenuCatedratico menu2 = new MenuCatedratico();
 	public void inicio() {
 		Administrador admin = new Administrador("admin","admin","admin");
 		lista.agregarNodo(admin);
@@ -118,11 +122,20 @@ public class Login {
 				String password;
 				String username = user.getText();
 				password = contra.getText();
+				boolean veri2 = esEntero(password);
 				boolean verificar = esEntero(username);
-				if(verificar==true){
-					boolean loginEstu=ListaEstudiante.loginEstudiante(username, password);
-					if(loginEstu==true){
+				if(verificar==true && veri2==true){
+					boolean log1 = ListaEstudiante.loginEstudiante(username, password);
+					if(log1==true){
 						menu.MenuEstudiante();
+					}else{
+						JOptionPane.showMessageDialog(null,"Verifique sus credenciales");
+					}
+				}else if(verificar==true&& veri2==false){
+					boolean login2 = ListaCatedratico.loginCatedratico(username, password);
+					if(login2==true){
+						JOptionPane.showMessageDialog(null,"Bienvenido al sistema");
+						menu2.menuCatedraticos();
 					}else{
 						JOptionPane.showMessageDialog(null,"Verifique sus credenciales");
 					}
@@ -147,9 +160,11 @@ public class Login {
 		ventanaLogin.setLocationRelativeTo(null);
 	}
 	public static boolean esEntero(String carnet) {
+		String uno = String.valueOf(carnet.charAt(0))+String.valueOf(carnet.charAt(1))+
+				String.valueOf(carnet.charAt(2))+String.valueOf(carnet.charAt(3)+String.valueOf(carnet.charAt(4)));
 		boolean resultado;
 		try {
-			Integer.parseInt(carnet);
+			Integer.parseInt(uno);
 			resultado = true;
 		} catch (NumberFormatException excepcion) {
 			resultado = false;

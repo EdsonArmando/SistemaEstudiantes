@@ -76,11 +76,11 @@ public class MenuAdministrador extends JDialog {
 		btnNewButton.setBounds(37, 202, 102, 23);
 		getContentPane().add(btnNewButton);
 		
-		JButton btnCargaMasiva = new JButton("Carga Masiva");
+		JButton btnCargaMasiva = new JButton("Semestres");
 		btnCargaMasiva.setBounds(37, 249, 102, 23);
 		getContentPane().add(btnCargaMasiva);
 		
-		JButton btnNewButton_1 = new JButton("Reportes");
+		JButton btnNewButton_1 = new JButton("CargaMasiva");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -92,6 +92,10 @@ public class MenuAdministrador extends JDialog {
 		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Armando\\Documents\\Edson\\EclipseEE\\SistemaEstudiantes\\src\\Image\\admin.png"));
 		lblNewLabel_1.setBounds(208, 75, 206, 207);
 		getContentPane().add(lblNewLabel_1);
+		
+		JButton btnReportes = new JButton("Reportes");
+		btnReportes.setBounds(37, 337, 102, 23);
+		getContentPane().add(btnReportes);
 	}
 	public void adminCatedraticos(){
 		dialogMaster = new JDialog();
@@ -197,5 +201,4 @@ public class MenuAdministrador extends JDialog {
 		dialogMaster.setResizable(false);
 		dialogMaster.setVisible(true);
 	}
-	
 }

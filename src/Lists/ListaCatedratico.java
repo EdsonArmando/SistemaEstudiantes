@@ -76,4 +76,16 @@ public class ListaCatedratico {
 			actual = actual.siguiente;
 		}while(actual!=primero);
 	}
+	public static boolean loginCatedratico(String cui, String contra){
+		boolean verdadero = false;
+		NodoCatedratico actual = new NodoCatedratico();
+		actual=primero;
+		do{
+			if(actual.getCatedratico().getCui().equals(cui)&& actual.getCatedratico().getContrasenia().equals(contra)){
+				verdadero = true;
+			}
+			actual = actual.siguiente;
+		}while(actual!=primero);
+		return verdadero;
+	}
 }
