@@ -13,6 +13,7 @@ import Views.Catedratico.ListaCatedraticos;
 import Views.Catedratico.MoificarCatedratico;
 import Views.Estudiante.AdministrarEstudiantes;
 import Views.Estudiante.ListadoEstudiantes;
+import Views.Semestre.FormularioCrear;
 
 import java.awt.Font;
 import java.awt.SystemColor;
@@ -77,6 +78,11 @@ public class MenuAdministrador extends JDialog {
 		getContentPane().add(btnNewButton);
 		
 		JButton btnCargaMasiva = new JButton("Semestres");
+		btnCargaMasiva.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				administrarSemestres();
+			}
+		});
 		btnCargaMasiva.setBounds(37, 249, 102, 23);
 		getContentPane().add(btnCargaMasiva);
 		
@@ -195,6 +201,64 @@ public class MenuAdministrador extends JDialog {
 		
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.setBounds(256, 97, 111, 23);
+		dialogMaster.getContentPane().add(btnEliminar);
+		dialogMaster.setBounds(100, 100, 453, 203);
+		dialogMaster.setLocationRelativeTo(null);
+		dialogMaster.setResizable(false);
+		dialogMaster.setVisible(true);
+	}
+	public void administrarSemestres(){
+		dialogMaster = new JDialog();
+		dialogMaster.getContentPane().setLayout(null);
+		
+		JLabel lblAdministrarEstudiantes = new JLabel("Administrar Semestres");
+		lblAdministrarEstudiantes.setForeground(SystemColor.activeCaptionBorder);
+		lblAdministrarEstudiantes.setBackground(SystemColor.activeCaptionBorder);
+		lblAdministrarEstudiantes.setFont(new Font("Calibri Light", Font.PLAIN, 16));
+		lblAdministrarEstudiantes.setBounds(132, 11, 180, 14);
+		dialogMaster.getContentPane().add(lblAdministrarEstudiantes);
+		
+		JButton btnAgregarUsuario = new JButton("Agregar");
+		btnAgregarUsuario.setBounds(65, 46, 111, 23);
+		btnAgregarUsuario.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				FormularioCrear form = new FormularioCrear();
+				form.setVisible(true);
+				form.setLocationRelativeTo(null);
+				form.setResizable(false);
+			}
+			
+		});
+		dialogMaster.getContentPane().add(btnAgregarUsuario);
+		
+		JButton btnNewButton = new JButton("Modificar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton.setBounds(65, 97, 111, 23);
+		dialogMaster.getContentPane().add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Visualizar");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_1.setBounds(256, 46, 111, 23);
+		dialogMaster.getContentPane().add(btnNewButton_1);
+		
+		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.setBounds(256, 97, 111, 23);
+		btnEliminar.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			
+			}
+			
+		});
 		dialogMaster.getContentPane().add(btnEliminar);
 		dialogMaster.setBounds(100, 100, 453, 203);
 		dialogMaster.setLocationRelativeTo(null);
