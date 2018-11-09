@@ -7,6 +7,12 @@ public class ListaSemestre {
 	static NodoSemestre inicio=null;
 	static NodoSemestre anterior=null;
 	
+	public static NodoSemestre getAnterior() {
+		return anterior;
+	}
+	public static void setAnterior(NodoSemestre anterior) {
+		ListaSemestre.anterior = anterior;
+	}
 	public static void insertarSemestre(Semestre semestre){
 		NodoSemestre nuevo = new NodoSemestre(semestre);
 		if(inicio==null){

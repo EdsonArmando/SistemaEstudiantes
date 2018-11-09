@@ -5,8 +5,10 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import Lists.ListaEstudiante;
 import Models.Estudiante;
@@ -21,6 +23,13 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 
 public class FormularioCrear{
@@ -163,7 +172,7 @@ public class FormularioCrear{
 		panelUsuario.add(btnAceptar_1);
 		dialogUsuario.add(panelUsuario);
 		dialogUsuario.setLocationRelativeTo(null);
-		dialogUsuario.setSize(450, 350);
+		dialogUsuario.setSize(455, 350);
 		dialogUsuario.setVisible(true);
 		dialogUsuario.setLocationRelativeTo(null);
 	}
