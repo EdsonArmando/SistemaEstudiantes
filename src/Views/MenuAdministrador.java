@@ -20,6 +20,7 @@ import Views.Catedratico.EliminacionCatedratico;
 import Views.Catedratico.FormularioCatedratico;
 import Views.Catedratico.ListaCatedraticos;
 import Views.Catedratico.MoificarCatedratico;
+import Views.Curso.FormularioCurso;
 import Views.Estudiante.AdministrarEstudiantes;
 import Views.Estudiante.ListadoEstudiantes;
 import Views.Semestre.FormularioCrear;
@@ -232,6 +233,17 @@ public class MenuAdministrador extends JDialog {
 
 		JButton btnAgregarUsuario = new JButton("Agregar");
 		btnAgregarUsuario.setBounds(65, 46, 111, 23);
+		btnAgregarUsuario.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			FormularioCurso form = new FormularioCurso();
+			form.setVisible(true);
+			form.setResizable(false);
+			form.setLocationRelativeTo(null);
+			}
+			
+		});
 		dialogMaster.getContentPane().add(btnAgregarUsuario);
 
 		JButton btnNewButton = new JButton("Modificar");
