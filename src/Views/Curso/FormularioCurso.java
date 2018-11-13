@@ -7,6 +7,10 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Lists.ListaCurso;
+import Models.Curso;
+
 import javax.swing.JLabel;
 import java.awt.SystemColor;
 import java.awt.Font;
@@ -22,6 +26,7 @@ public class FormularioCurso extends JDialog {
 	private JTextField idSeccion;
 	private JTextField idPre;
 	private JTextField idPost;
+	ListaCurso lista = new ListaCurso();
 	public FormularioCurso() {
 		setBounds(100, 100, 455, 350);
 		getContentPane().setLayout(null);
@@ -99,6 +104,10 @@ public class FormularioCurso extends JDialog {
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int codigo=Integer.parseInt(idCodigo.getText()),creditos=Integer.parseInt(idCreditos.getText());
+				String nombre=idNombre.getText(),cuiCate=idCui.getText(),seccion=idSeccion.getText(),pre=idPre.getText(),post=idPost.getText();
+				Curso curso = new Curso(codigo,nombre,cuiCate,creditos,seccion,pre,post);
+				ListaCurso.insertarCurso(curso);
 			}
 		});
 		btnAceptar.setBounds(234, 116, 89, 23);
@@ -107,6 +116,7 @@ public class FormularioCurso extends JDialog {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 			}
 		});
 		btnCancelar.setBounds(234, 179, 89, 23);

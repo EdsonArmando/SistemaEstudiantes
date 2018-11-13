@@ -26,7 +26,6 @@ import java.awt.event.ActionEvent;
 public class ListadoEstudiantes extends JDialog {
 	ListaEstudiante lista = new ListaEstudiante();
 	private NodoEstudiante primero = lista.getPrimero();
-	private final JPanel contentPanel = new JPanel();
 	private JTable tabla;
 	public ListadoEstudiantes() {
 		DefaultTableModel modelo = new DefaultTableModel();

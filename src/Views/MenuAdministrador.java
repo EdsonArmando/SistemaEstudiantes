@@ -11,6 +11,7 @@ import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import Lists.ListaCatedratico;
+import Lists.ListaCurso;
 import Lists.ListaEstudiante;
 import Lists.ListaSemestre;
 import Models.Catedratico;
@@ -20,7 +21,9 @@ import Views.Catedratico.EliminacionCatedratico;
 import Views.Catedratico.FormularioCatedratico;
 import Views.Catedratico.ListaCatedraticos;
 import Views.Catedratico.MoificarCatedratico;
+import Views.Curso.EliminarCurso;
 import Views.Curso.FormularioCurso;
+import Views.Curso.ListaCursos;
 import Views.Estudiante.AdministrarEstudiantes;
 import Views.Estudiante.ListadoEstudiantes;
 import Views.Semestre.FormularioCrear;
@@ -35,6 +38,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 
@@ -257,6 +261,10 @@ public class MenuAdministrador extends JDialog {
 		JButton btnNewButton_1 = new JButton("Visualizar");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ListaCursos lista = new ListaCursos();
+				lista.setVisible(true);
+				lista.setResizable(false);
+				lista.setLocationRelativeTo(null);
 			}
 		});
 		btnNewButton_1.setBounds(256, 46, 111, 23);
@@ -264,6 +272,22 @@ public class MenuAdministrador extends JDialog {
 
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.setBounds(256, 97, 111, 23);
+		btnEliminar.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				EliminarCurso listas = new EliminarCurso();
+				listas.setVisible(true);
+				listas.setResizable(false);
+				listas.setLocationRelativeTo(null);
+				ListaCurso lista = new ListaCurso();
+				Scanner uno = new Scanner(System.in);
+				System.out.println("Ingrese codigo");
+				int codigo = uno.nextInt();
+				lista.eliminar(codigo);
+			}
+			
+		});
 		dialogMaster.getContentPane().add(btnEliminar);
 		dialogMaster.setBounds(100, 100, 453, 203);
 		dialogMaster.setLocationRelativeTo(null);
