@@ -15,6 +15,7 @@ import Lists.ListaCurso;
 import Lists.ListaEstudiante;
 import Lists.ListaSemestre;
 import Models.Catedratico;
+import Models.Curso;
 import Models.Estudiante;
 import Models.Semestre;
 import Views.Catedratico.EliminacionCatedratico;
@@ -154,6 +155,14 @@ public class MenuAdministrador extends JDialog {
 		getContentPane().add(lblNewLabel_1);
 
 		JButton btnReportes = new JButton("Reportes");
+		btnReportes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Reportes repo = new Reportes();
+				repo.setVisible(true);
+				repo.setResizable(false);
+				repo.setLocationRelativeTo(null);
+			}
+		});
 		btnReportes.setBounds(37, 337, 102, 23);
 		getContentPane().add(btnReportes);
 	}
@@ -280,13 +289,7 @@ public class MenuAdministrador extends JDialog {
 				listas.setVisible(true);
 				listas.setResizable(false);
 				listas.setLocationRelativeTo(null);
-				ListaCurso lista = new ListaCurso();
-				Scanner uno = new Scanner(System.in);
-				System.out.println("Ingrese codigo");
-				int codigo = uno.nextInt();
-				lista.eliminar(codigo);
 			}
-			
 		});
 		dialogMaster.getContentPane().add(btnEliminar);
 		dialogMaster.setBounds(100, 100, 453, 203);
@@ -361,7 +364,10 @@ public class MenuAdministrador extends JDialog {
 		ListaEstudiante lista = new ListaEstudiante();
 		ListaCatedratico lista2 = new ListaCatedratico();
 		ListaSemestre lista3 = new ListaSemestre();
+		ListaCurso lista4 = new ListaCurso();
 		String nombre = null, identificador = null, carne = null, creditos = null, correo = null,anio=null;
+		String  seccion=null,pre=null,post=null;
+		int credito=0,codigo=0;
 		String lineas[] = superTexto.split("\n");
 		for (String linea : lineas) {
 			if (linea != "") {
@@ -385,6 +391,16 @@ public class MenuAdministrador extends JDialog {
 					anio = Clave_Valor[1];
 					Semestre semestre = new Semestre(nombre,Integer.parseInt(anio));
 					ListaSemestre.insertarSemestre(semestre);
+				}else if(Clave_Valor.length==7){
+					codigo = Integer.parseInt(Clave_Valor[0]);
+					nombre = Clave_Valor[1];
+					identificador = Clave_Valor[2];
+					credito = Integer.parseInt(Clave_Valor[3]);
+					seccion = Clave_Valor[4];
+					pre = Clave_Valor[5];
+					post = Clave_Valor[6];
+					Curso curso = new Curso(codigo,nombre,identificador,credito,seccion,pre,post);
+					ListaCurso.insertarCurso(curso);
 				}
 			}
 		}
