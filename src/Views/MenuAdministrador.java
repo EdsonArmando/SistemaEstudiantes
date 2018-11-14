@@ -25,6 +25,7 @@ import Views.Catedratico.MoificarCatedratico;
 import Views.Curso.EliminarCurso;
 import Views.Curso.FormularioCurso;
 import Views.Curso.ListaCursos;
+import Views.Curso.ListadoModificar;
 import Views.Estudiante.AdministrarEstudiantes;
 import Views.Estudiante.ListadoEstudiantes;
 import Views.Semestre.FormularioCrear;
@@ -262,6 +263,10 @@ public class MenuAdministrador extends JDialog {
 		JButton btnNewButton = new JButton("Modificar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ListadoModificar listado = new ListadoModificar();
+				listado.setVisible(true);
+				listado.setLocationRelativeTo(null);
+				listado.setResizable(false);
 			}
 		});
 		btnNewButton.setBounds(65, 97, 111, 23);
