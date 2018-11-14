@@ -7,6 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Views.Curso.AsignacionCurso;
+
 import javax.swing.JLabel;
 import java.awt.SystemColor;
 import java.awt.Font;
@@ -36,6 +39,17 @@ public class MenuEstudiante extends JDialog {
 		
 		JButton btnAsignar = new JButton("Asignar");
 		btnAsignar.setBounds(10, 181, 89, 23);
+		btnAsignar.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				AsignacionCurso asignar = new AsignacionCurso();
+				asignar.setVisible(true);
+				asignar.setResizable(false);
+				asignar.setLocationRelativeTo(null);
+			}
+			
+		});
 		uno.add(btnAsignar);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
