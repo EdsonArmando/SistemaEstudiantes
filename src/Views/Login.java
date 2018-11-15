@@ -135,7 +135,7 @@ public class Login {
 					boolean login2 = ListaCatedratico.loginCatedratico(username, password);
 					if(login2==true){
 						JOptionPane.showMessageDialog(null,"Bienvenido al sistema");
-						menu2.menuCatedraticos();
+						menu2.menuCatedraticos(username);
 					}else{
 						JOptionPane.showMessageDialog(null,"Verifique sus credenciales");
 					}

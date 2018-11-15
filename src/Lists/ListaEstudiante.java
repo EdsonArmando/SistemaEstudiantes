@@ -145,4 +145,16 @@ public class ListaEstudiante {
 		}while(actual !=ultimo);
 		return verdadero;
 	}
+	public static String retornarNombre(int carne){
+		String nombre = null;
+		NodoEstudiante actual = new NodoEstudiante();
+		actual = ultimo;
+		do{
+			if(actual.getEstudiante().getCarne()==carne){
+				nombre = actual.getEstudiante().getNombre();
+			}
+			actual = actual.Anterior;
+		}while(actual !=ultimo);
+		return nombre;
+	}
 }

@@ -17,7 +17,7 @@ import javax.swing.border.EmptyBorder;
 import Views.Estudiante.MenuEstudiante;
 
 public class MenuCatedratico extends JDialog {
-	public void menuCatedraticos() {
+	public void menuCatedraticos(String cui) {
 		JDialog uno = new JDialog();
 		uno.setSize(450,400);
 		uno.setLayout(null);
@@ -25,12 +25,16 @@ public class MenuCatedratico extends JDialog {
 		JLabel lblNewLabel = new JLabel("Menú Catedráticos");
 		lblNewLabel.setFont(new Font("Calibri Light", Font.PLAIN, 18));
 		lblNewLabel.setForeground(SystemColor.activeCaptionBorder);
-		lblNewLabel.setBounds(164, 25, 134, 14);
+		lblNewLabel.setBounds(164, 25, 154, 14);
 		uno.add(lblNewLabel);
 		
 		JButton btnNewButton = new JButton("Ingresar Notas");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				IngresarNotas notas = new IngresarNotas(cui);
+				notas.setVisible(true);
+				notas.setResizable(false);
+				notas.setLocationRelativeTo(null);
 			}
 		});
 		btnNewButton.setBounds(10, 120, 89, 25);

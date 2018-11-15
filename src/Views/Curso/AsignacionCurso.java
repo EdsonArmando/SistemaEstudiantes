@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Collection;
@@ -25,8 +27,10 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
+import Lists.ListaAsignacionCurso;
 import Lists.ListaCurso;
 import Lists.ListaSemestre;
+import Models.Asignacion;
 import Nodes.NodoCurso;
 import Nodes.NodoSemestre;
 
@@ -40,6 +44,8 @@ public class AsignacionCurso extends JDialog {
 	private JTable tabla;
 	int cont = 1;
 	String codigos;
+	JComboBox idCurso = new JComboBox();
+	JComboBox idSeccion = new JComboBox();
 
 	public AsignacionCurso(int carne) {
 		DefaultTableModel modelo = new DefaultTableModel();
@@ -109,20 +115,23 @@ public class AsignacionCurso extends JDialog {
 		NodoSemestre aux = new NodoSemestre();
 		aux = anterior;
 		while (aux != null) {
-			idSemestre.addItem(aux.getSemestre().getNombre() + " " + aux.getSemestre().getAnio());
+			idSemestre.addItem(aux.getSemestre().getNombre());
 			aux = aux.anterior;
 		}
 		getContentPane().add(idSemestre);
 		NodoCurso puntero = primero;
-		JComboBox idCurso = new JComboBox();
-		JComboBox idSeccion = new JComboBox();
 		while (puntero != null) {
 			idCurso.addItem(puntero.getCurso().getNombre());
-			if (puntero.getCurso().getNombre().equals(idCurso.getSelectedItem())) {
-				idSeccion.addItem(puntero.getCurso().getSeccion());
-			}
 			puntero = puntero.Siguiente;
 		}
+		idCurso.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mostrarSeccion((String) idCurso.getSelectedItem());
+			}
+			
+		});
 		idCurso.setBounds(115, 97, 95, 20);
 		getContentPane().add(idCurso);
 		idSeccion.setBounds(220, 97, 70, 20);
@@ -158,14 +167,20 @@ public class AsignacionCurso extends JDialog {
 		JButton btnAsignar = new JButton("Asignar");
 		btnAsignar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Asignacion asignacion;
+				ListaAsignacionCurso lista = new ListaAsignacionCurso();
 				for (int i = 0; i < tabla.getRowCount(); i++) {
-					String nombre, cate;
+					String nombre, cate,seccion,semestre;
+					int creditos;
 					nombre = (String) tabla.getValueAt(i, 1);
-					System.out.println(nombre);
 					cate = (String) tabla.getValueAt(i, 2);
-					System.out.println(cate);
-					System.out.println(carne);
+					seccion = (String) tabla.getValueAt(i, 3);
+					creditos = (int) tabla.getValueAt(i, 4);
+					semestre = (String) tabla.getValueAt(i, 5);
+					asignacion = new Asignacion(semestre,nombre,carne,cate,seccion,creditos,0,0,0,false);
+					ListaAsignacionCurso.ingresarAsignacion(asignacion);
 				}
+				JOptionPane.showMessageDialog(null, "Asignación Exitosa");
 			}
 		});
 		btnAsignar.setBounds(307, 239, 89, 23);
@@ -173,5 +188,16 @@ public class AsignacionCurso extends JDialog {
 
 		getContentPane().add(btnAgregar);
 
+	}
+	
+	public void mostrarSeccion(String curso){
+		idSeccion.removeAllItems();
+		NodoCurso puntero = primero;
+		while (puntero != null) {
+			if(puntero.getCurso().getNombre().equals(curso)){
+				idSeccion.addItem(puntero.getCurso().getSeccion());
+			}
+			puntero = puntero.Siguiente;
+		}
 	}
 }
