@@ -18,7 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class MenuEstudiante extends JDialog {
-	public void  MenuEstudiante() {
+	public void  MenuEstudiante(int carne) {
 		JDialog uno = new JDialog();
 		uno.setSize(450,400);
 		uno.setLayout(null);
@@ -43,7 +43,7 @@ public class MenuEstudiante extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				AsignacionCurso asignar = new AsignacionCurso();
+				AsignacionCurso asignar = new AsignacionCurso(carne);
 				asignar.setVisible(true);
 				asignar.setResizable(false);
 				asignar.setLocationRelativeTo(null);

@@ -127,7 +127,7 @@ public class Login {
 				if(verificar==true && veri2==true){
 					boolean log1 = ListaEstudiante.loginEstudiante(username, password);
 					if(log1==true){
-						menu.MenuEstudiante();
+						menu.MenuEstudiante(Integer.parseInt(username));
 					}else{
 						JOptionPane.showMessageDialog(null,"Verifique sus credenciales");
 					}
