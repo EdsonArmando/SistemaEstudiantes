@@ -84,9 +84,15 @@ public class IngresarNotas extends JDialog {
 			getContentPane().add(idCurso);
 			 NodoCurso actual = new NodoCurso();
 			 actual = primero;
+			 String nombre =null;
 			 while(actual !=null){
 				 if(actual.getCurso().getCuiCatedratico().equals(cuiCatedratico)){
-					 idCurso.addItem(actual.getCurso().getNombre());
+					 if (actual.getCurso().getNombre().equals(nombre)) {
+
+						} else {
+							 idCurso.addItem(actual.getCurso().getNombre());
+							nombre = actual.getCurso().getNombre();
+						}
 				 }
 				 actual = actual.Siguiente;
 				 }
@@ -95,7 +101,8 @@ public class IngresarNotas extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 					NodoAsignacion puntero=prim;
 					while(puntero != null){
-						if(puntero.getAsignacion().getSemestre().equals(idSemestre.getSelectedItem())&& puntero.getAsignacion().getCurso().equals(idCurso.getSelectedItem())){
+						if(puntero.getAsignacion().getSemestre().equals(idSemestre.getSelectedItem())&& puntero.getAsignacion().getCurso().equals(idCurso.getSelectedItem())
+								&& puntero.getAsignacion().getCuiCatedratico().equals(cuiCatedratico)){
 							 fila[0] = puntero.getAsignacion().getCarne();
 							 fila[1] = ListaEstudiante.retornarNombre(puntero.getAsignacion().getCarne());
 							 fila[2] = puntero.getAsignacion().getNotaTotal();

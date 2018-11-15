@@ -120,17 +120,23 @@ public class AsignacionCurso extends JDialog {
 		}
 		getContentPane().add(idSemestre);
 		NodoCurso puntero = primero;
+		String nombre = null;
 		while (puntero != null) {
-			idCurso.addItem(puntero.getCurso().getNombre());
+			if (puntero.getCurso().getNombre().equals(nombre)) {
+
+			} else {
+				idCurso.addItem(puntero.getCurso().getNombre());
+				nombre = puntero.getCurso().getNombre();
+			}
 			puntero = puntero.Siguiente;
 		}
-		idCurso.addActionListener(new ActionListener(){
+		idCurso.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				mostrarSeccion((String) idCurso.getSelectedItem());
 			}
-			
+
 		});
 		idCurso.setBounds(115, 97, 95, 20);
 		getContentPane().add(idCurso);
@@ -170,14 +176,14 @@ public class AsignacionCurso extends JDialog {
 				Asignacion asignacion;
 				ListaAsignacionCurso lista = new ListaAsignacionCurso();
 				for (int i = 0; i < tabla.getRowCount(); i++) {
-					String nombre, cate,seccion,semestre;
+					String nombre, cate, seccion, semestre;
 					int creditos;
 					nombre = (String) tabla.getValueAt(i, 1);
 					cate = (String) tabla.getValueAt(i, 2);
 					seccion = (String) tabla.getValueAt(i, 3);
 					creditos = (int) tabla.getValueAt(i, 4);
 					semestre = (String) tabla.getValueAt(i, 5);
-					asignacion = new Asignacion(semestre,nombre,carne,cate,seccion,creditos,0,0,0,false);
+					asignacion = new Asignacion(semestre, nombre, carne, cate, seccion, creditos, 0, 0, 0, false);
 					ListaAsignacionCurso.ingresarAsignacion(asignacion);
 				}
 				JOptionPane.showMessageDialog(null, "Asignación Exitosa");
@@ -189,12 +195,12 @@ public class AsignacionCurso extends JDialog {
 		getContentPane().add(btnAgregar);
 
 	}
-	
-	public void mostrarSeccion(String curso){
+
+	public void mostrarSeccion(String curso) {
 		idSeccion.removeAllItems();
 		NodoCurso puntero = primero;
 		while (puntero != null) {
-			if(puntero.getCurso().getNombre().equals(curso)){
+			if (puntero.getCurso().getNombre().equals(curso)) {
 				idSeccion.addItem(puntero.getCurso().getSeccion());
 			}
 			puntero = puntero.Siguiente;
