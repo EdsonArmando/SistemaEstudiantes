@@ -1,5 +1,7 @@
 package Lists;
 
+import javax.swing.JOptionPane;
+
 import Models.Asignacion;
 import Nodes.NodoAsignacion;
 
@@ -30,4 +32,22 @@ public class ListaAsignacionCurso {
 			puntero = puntero.siguiente;
 		}
 	}
+	public static void ingresarNota(int carne,int zona,int examen,int total){
+		NodoAsignacion puntero=primero;
+		while(puntero != null){
+			if(puntero.getAsignacion().getCarne()==carne){
+				puntero.getAsignacion().setExamen(examen);
+				puntero.getAsignacion().setZona(zona);
+				puntero.getAsignacion().setNotaTotal(total);
+				if(total<61){
+					puntero.getAsignacion().setAprobado(false);
+				}else{
+					puntero.getAsignacion().setAprobado(true);
+				}
+				JOptionPane.showMessageDialog(null, "Nota Ingresada correctamente");
+			}
+			puntero = puntero.siguiente;
+		}
+	}
+	
 }

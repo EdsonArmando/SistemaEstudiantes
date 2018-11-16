@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -34,6 +36,7 @@ public class IngresarNotas extends JDialog {
 		private NodoCurso primero = ListaCurso.getPrimero();
 		private NodoSemestre anterior = ListaSemestre.getAnterior();
 		private JTable tabla;
+		int carne;
 		public IngresarNotas(String cuiCatedratico){
 			setBounds(100, 100, 512, 300);
 			getContentPane().setLayout(null);
@@ -52,7 +55,42 @@ public class IngresarNotas extends JDialog {
 			getContentPane().setLayout(null);
 			tabla.setBounds(10, 125, 414, 100);
 			getContentPane().add(scroll);
-			
+			tabla.addMouseListener(new MouseListener() {
+
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					if (e.getClickCount() == 1) {
+						int fila = tabla.getSelectedRowCount();
+						if(fila==1){
+							int row = tabla.getSelectedRow();
+							Object codigo = tabla.getValueAt(row, 0);
+							carne = (Integer)codigo;
+							System.out.println(carne);
+							FormIngresarNotas ingresar = new FormIngresarNotas(carne);
+							ingresar.setVisible(true);
+							ingresar.setLocationRelativeTo(null);
+							ingresar.setResizable(false);
+						}
+					}
+				}
+
+				@Override
+				public void mousePressed(MouseEvent e) {
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent e) {
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent e) {
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+				}
+
+			});
 			JLabel lblListadoDeUsuaros = new JLabel("Ingresar Notas");
 			lblListadoDeUsuaros.setForeground(SystemColor.activeCaptionBorder);
 			lblListadoDeUsuaros.setFont(new Font("Calibri Light", Font.PLAIN, 18));
