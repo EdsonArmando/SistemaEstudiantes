@@ -15,9 +15,11 @@ import java.awt.SystemColor;
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 
-public class FormIngresarNotas extends JDialog {
+public class FormIngresarNotas extends JDialog  {
 	private JTextField idZona;
 	private JTextField idExamen;
 	private JTextField idTotal;
@@ -54,9 +56,39 @@ public class FormIngresarNotas extends JDialog {
 		lblTotal.setBounds(10, 201, 46, 14);
 		getContentPane().add(lblTotal);
 		
-		//int total = Integer.parseInt(idZona.getText())+Integer.parseInt(idExamen.getText());
 		idTotal = new JTextField();
-		idTotal.setText("Hola");
+		idTotal.addMouseListener(new MouseListener(){
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int total = Integer.parseInt(idZona.getText())+Integer.parseInt(idExamen.getText());
+				idTotal.setText(String.valueOf(total));
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 		idTotal.setEnabled(false);
 		idTotal.setBounds(66, 198, 86, 20);
 		getContentPane().add(idTotal);
@@ -84,4 +116,5 @@ public class FormIngresarNotas extends JDialog {
 		getContentPane().add(btnCancelar);
 		
 	}
+	
 }

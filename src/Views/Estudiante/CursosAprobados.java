@@ -65,7 +65,7 @@ public class CursosAprobados extends JDialog {
 		JLabel lblListadoDeUsuaros = new JLabel("Listado de Cursos Aprobados");
 		lblListadoDeUsuaros.setForeground(SystemColor.activeCaptionBorder);
 		lblListadoDeUsuaros.setFont(new Font("Calibri Light", Font.PLAIN, 18));
-		lblListadoDeUsuaros.setBounds(144, 26, 172, 23);
+		lblListadoDeUsuaros.setBounds(117, 26, 212, 23);
 		getContentPane().add(lblListadoDeUsuaros);
 		
 		JButton btnSalir = new JButton("Salir");
