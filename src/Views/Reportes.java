@@ -7,10 +7,15 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Views.Reporte.ReporteEstudiantes;
+
 import javax.swing.JLabel;
 import java.awt.SystemColor;
 import java.awt.Font;
 import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Reportes extends JDialog {
 	public Reportes() {
@@ -28,6 +33,14 @@ public class Reportes extends JDialog {
 		getContentPane().add(lblReporteEstudiantes);
 		
 		JButton button = new JButton("");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ReporteEstudiantes repo = new ReporteEstudiantes();
+				repo.setVisible(true);
+				repo.setResizable(false);
+				repo.setLocationRelativeTo(null);
+			}
+		});
 		button.setForeground(SystemColor.controlHighlight);
 		button.setBounds(128, 81, 89, 23);
 		getContentPane().add(button);
