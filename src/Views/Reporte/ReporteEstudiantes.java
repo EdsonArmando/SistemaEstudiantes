@@ -36,6 +36,7 @@ public class ReporteEstudiantes extends JDialog {
 	JTable tabla;
 	double porcentaje = 0.0;
 	JComboBox idSeccion = new JComboBox();
+	JComboBox idSemestre = new JComboBox();
 	public ReporteEstudiantes() {
 		DefaultTableModel modelo = new DefaultTableModel();
 		 modelo.addColumn("Estudiantes Ganaron");
@@ -49,10 +50,10 @@ public class ReporteEstudiantes extends JDialog {
 			 tabla = new JTable(modelo);
 			 tabla.setPreferredScrollableViewportSize(new Dimension(200,200));
 			 JScrollPane scroll = new JScrollPane(tabla);
-			 scroll.setSize(414, 100);
+			 scroll.setSize(512, 100);
 			 scroll.setLocation(10, 96);
 			 
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 548, 300);
 		getContentPane().setLayout(null);
 		
 		
@@ -102,12 +103,21 @@ public class ReporteEstudiantes extends JDialog {
 		JLabel lblSemestre = new JLabel("Semestre:");
 		lblSemestre.setBounds(238, 71, 65, 14);
 		getContentPane().add(lblSemestre);
-		
-		JComboBox idSemestre = new JComboBox();
+		JComboBox idAnio = new JComboBox();
+		idAnio.setBounds(377, 68, 65, 20);
+		getContentPane().add(idAnio);
+		idSemestre.addItem("Semestre 1");
+		idSemestre.addItem("Semestre 2");
 		NodoSemestre aux = new NodoSemestre();
 		aux = anterior;
+		int anio =0;
 		while (aux != null) {
-			idSemestre.addItem(aux.getSemestre().getNombre());
+			if (aux.getSemestre().getAnio()==anio) {
+
+			} else {
+				idAnio.addItem(aux.getSemestre().getAnio());
+				anio = aux.getSemestre().getAnio();
+			}
 			aux = aux.anterior;
 		}
 		idSemestre.setBounds(292, 68, 75, 20);
@@ -118,64 +128,66 @@ public class ReporteEstudiantes extends JDialog {
 				String semestre = (String) idSemestre.getSelectedItem();
 				String curso = (String) idCurso.getSelectedItem();
 				String seccion = (String) idSeccion.getSelectedItem();
-				double total = cantidadAsignados(semestre, seccion, curso);
-				 fila[0] = cantidadAprobados(semestre,seccion,curso);
-				 fila[1] = total/cantidadAprobados(semestre,seccion,curso);
-				 fila[2] = cantidadReprobados(semestre,seccion,curso);
-				 fila[3] = total/cantidadReprobados(semestre,seccion,curso);
-				 fila[4] = cantidadAsignados(semestre,seccion,curso);
-				 fila[5] = catedraticoEncargado(semestre,seccion,curso);
+				int anio =(int) idAnio.getSelectedItem();
+				double total = cantidadAsignados(semestre, seccion, curso,anio);
+				 fila[0] = cantidadAprobados(semestre,seccion,curso,anio);
+				 fila[1] = total/cantidadAprobados(semestre,seccion,curso,anio)*100;
+				 fila[2] = cantidadReprobados(semestre,seccion,curso,anio);
+				 fila[3] = total/cantidadReprobados(semestre,seccion,curso,anio)*100;
+				 fila[4] = cantidadAsignados(semestre,seccion,curso,anio);
+				 fila[5] = catedraticoEncargado(semestre,seccion,curso,anio);
 				 modelo.addRow(fila);
 			}
 		});
-		btnMostrar.setBounds(335, 207, 89, 23);
+		btnMostrar.setBounds(433, 207, 89, 23);
 		getContentPane().add(btnMostrar);
 	}
-	public int  cantidadAprobados(String semestre,String seccion,String curso){
+	public int  cantidadAprobados(String semestre,String seccion,String curso,int anio){
 		NodoAsignacion puntero=primero;
 		int cantidad =0;
 		while(puntero != null){
 			if(puntero.getAsignacion().isAprobado()==true && puntero.getAsignacion().getCurso().equals(curso) && 
-					puntero.getAsignacion().getSemestre().equals(semestre)&& puntero.getAsignacion().getSeccion().equals(seccion)){
+					puntero.getAsignacion().getSemestre().equals(semestre)&&puntero.getAsignacion().getAnio()==anio&& puntero.getAsignacion().getSeccion().equals(seccion)){
 				cantidad++;
 			}
 			puntero=puntero.siguiente;
 		}
 		return cantidad;
 	}
-	public int cantidadAsignados(String semestre,String seccion,String curso){
+	public int cantidadAsignados(String semestre,String seccion,String curso,int anio){
 		NodoAsignacion puntero=primero;
 		int cantidad =0;
 		while(puntero != null){
-			if(puntero.getAsignacion().getCurso().equals(curso) &&	puntero.getAsignacion().getSemestre().equals(semestre)&& puntero.getAsignacion().getSeccion().equals(seccion)){
+			if(puntero.getAsignacion().getCurso().equals(curso)&&puntero.getAsignacion().getAnio()==anio &&	puntero.getAsignacion().getSemestre().equals(semestre)&& puntero.getAsignacion().getSeccion().equals(seccion)){
 				cantidad++;
 			}
 			puntero=puntero.siguiente;
 		}
 		return cantidad;
 	}
-	public int  cantidadReprobados(String semestre,String seccion,String curso){
+	public int  cantidadReprobados(String semestre,String seccion,String curso,int anio){
 		NodoAsignacion puntero=primero;
 		int cantidad =0;
 		while(puntero != null){
 			if(puntero.getAsignacion().isAprobado()==false && puntero.getAsignacion().getCurso().equals(curso) && 
-					puntero.getAsignacion().getSemestre().equals(semestre)&& puntero.getAsignacion().getSeccion().equals(seccion)){
+					puntero.getAsignacion().getSemestre().equals(semestre)&&puntero.getAsignacion().getAnio()==anio&& puntero.getAsignacion().getSeccion().equals(seccion)){
 				cantidad++;
 			}
 			puntero=puntero.siguiente;
 		}
 		return cantidad;
 	}
-	public String catedraticoEncargado(String semestre,String seccion,String curso){
+	public String catedraticoEncargado(String semestre,String seccion,String curso,int anio){
 		String nombre=null;
 		NodoAsignacion puntero=primero;
 		while(puntero != null){
 			if(puntero.getAsignacion().getCurso().equals(curso) &&	puntero.getAsignacion().getSemestre().equals(semestre)
-					&& puntero.getAsignacion().getSeccion().equals(seccion)){
+					&& puntero.getAsignacion().getSeccion().equals(seccion)&&puntero.getAsignacion().getAnio()==anio){
 				nombre = puntero.getAsignacion().getCuiCatedratico();
 			}
 			puntero=puntero.siguiente;
 		}
+		
 		return nombre;
 	}
 	public void mostrarSeccion(String curso) {

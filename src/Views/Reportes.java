@@ -8,6 +8,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Views.Reporte.ReporteCatedratico;
+import Views.Reporte.ReporteEstudiante;
 import Views.Reporte.ReporteEstudiantes;
 
 import javax.swing.JLabel;
@@ -32,8 +34,9 @@ public class Reportes extends JDialog {
 		lblReporteEstudiantes.setBounds(10, 85, 108, 14);
 		getContentPane().add(lblReporteEstudiantes);
 		
-		JButton button = new JButton("");
-		button.addActionListener(new ActionListener() {
+		JButton btnGenerar = new JButton("Generar");
+		btnGenerar.setToolTipText("");
+		btnGenerar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ReporteEstudiantes repo = new ReporteEstudiantes();
 				repo.setVisible(true);
@@ -41,25 +44,43 @@ public class Reportes extends JDialog {
 				repo.setLocationRelativeTo(null);
 			}
 		});
-		button.setForeground(SystemColor.controlHighlight);
-		button.setBounds(128, 81, 89, 23);
-		getContentPane().add(button);
+		btnGenerar.setForeground(SystemColor.controlHighlight);
+		btnGenerar.setBounds(128, 81, 89, 23);
+		getContentPane().add(btnGenerar);
 		
 		JLabel lblNewLabel = new JLabel("Resumen Estudiante:");
 		lblNewLabel.setBounds(10, 134, 108, 14);
 		getContentPane().add(lblNewLabel);
 		
-		JButton button_1 = new JButton("");
-		button_1.setBounds(128, 134, 89, 23);
-		getContentPane().add(button_1);
+		JButton btnGenerar_1 = new JButton("Generar");
+		btnGenerar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ReporteEstudiante repo = new ReporteEstudiante();
+				repo.setVisible(true);
+				repo.setResizable(false);
+				repo.setLocationRelativeTo(null);
+			}
+		});
+		btnGenerar_1.setToolTipText("");
+		btnGenerar_1.setBounds(128, 134, 89, 23);
+		getContentPane().add(btnGenerar_1);
 		
 		JLabel lblNewLabel_1 = new JLabel("Reporte Catedrático:");
 		lblNewLabel_1.setBounds(10, 183, 108, 14);
 		getContentPane().add(lblNewLabel_1);
 		
-		JButton button_2 = new JButton("");
-		button_2.setBounds(128, 179, 89, 23);
-		getContentPane().add(button_2);
+		JButton btnGenerar_2 = new JButton("Generar");
+		btnGenerar_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ReporteCatedratico repo = new ReporteCatedratico();
+				repo.setVisible(true);
+				repo.setResizable(false);
+				repo.setLocationRelativeTo(null);
+			}
+		});
+		btnGenerar_2.setToolTipText("");
+		btnGenerar_2.setBounds(128, 179, 89, 23);
+		getContentPane().add(btnGenerar_2);
 		
 		JLabel lblD = new JLabel("");
 		lblD.setIcon(new ImageIcon(Reportes.class.getResource("/Image/reportes.png")));

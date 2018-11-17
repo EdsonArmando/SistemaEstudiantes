@@ -2,6 +2,7 @@ package Models;
 
 public class Asignacion {
 	private String semestre;
+	private int anio;
 	private String curso;
 	private int carne;
 	private String cuiCatedratico;
@@ -11,6 +12,13 @@ public class Asignacion {
 	private int examen;
 	private int notaTotal;
 	private boolean aprobado;
+	
+	public int getAnio() {
+		return anio;
+	}
+	public void setAnio(int anio) {
+		this.anio = anio;
+	}
 	public String getSemestre() {
 		return semestre;
 	}
@@ -71,9 +79,10 @@ public class Asignacion {
 	public void setAprobado(boolean aprobado) {
 		this.aprobado = aprobado;
 	}
-	public Asignacion(String semestre, String curso, int carne, String cuiCatedratico, String seccion, int creditos,
+	public Asignacion(String semestre,int anio, String curso, int carne, String cuiCatedratico, String seccion, int creditos,
 			int zona, int examen, int notaTotal, boolean aprobado) {
 		super();
+		this.anio = anio;
 		this.semestre = semestre;
 		this.curso = curso;
 		this.carne = carne;

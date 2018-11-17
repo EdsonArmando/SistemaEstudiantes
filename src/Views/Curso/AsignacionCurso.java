@@ -109,13 +109,24 @@ public class AsignacionCurso extends JDialog {
 		});
 		btnSalir.setBounds(406, 239, 89, 23);
 		getContentPane().add(btnSalir);
+		JComboBox idAnio = new JComboBox();
+		idAnio.setBounds(115, 97, 43, 20);
+		getContentPane().add(idAnio);
 
 		JComboBox idSemestre = new JComboBox();
 		idSemestre.setBounds(10, 97, 95, 20);
+		int anio=0;
 		NodoSemestre aux = new NodoSemestre();
 		aux = anterior;
+		idSemestre.addItem("Semestre 1");
+		idSemestre.addItem("Semestre 2");
 		while (aux != null) {
-			idSemestre.addItem(aux.getSemestre().getNombre());
+			if (aux.getSemestre().getAnio()==anio) {
+
+			} else {
+				idAnio.addItem(aux.getSemestre().getAnio());
+				anio = aux.getSemestre().getAnio();
+			}
 			aux = aux.anterior;
 		}
 		getContentPane().add(idSemestre);
@@ -138,9 +149,9 @@ public class AsignacionCurso extends JDialog {
 			}
 
 		});
-		idCurso.setBounds(115, 97, 95, 20);
+		idCurso.setBounds(185, 97, 95, 20);
 		getContentPane().add(idCurso);
-		idSeccion.setBounds(220, 97, 70, 20);
+		idSeccion.setBounds(290, 97, 70, 20);
 		getContentPane().add(idSeccion);
 		JButton btnAgregar = new JButton("Agregar");
 		btnAgregar.addActionListener(new ActionListener() {
@@ -177,13 +188,14 @@ public class AsignacionCurso extends JDialog {
 				ListaAsignacionCurso lista = new ListaAsignacionCurso();
 				for (int i = 0; i < tabla.getRowCount(); i++) {
 					String nombre, cate, seccion, semestre;
-					int creditos;
+					int creditos,anio;
+					anio = (int) idAnio.getSelectedItem();
 					nombre = (String) tabla.getValueAt(i, 1);
 					cate = (String) tabla.getValueAt(i, 2);
 					seccion = (String) tabla.getValueAt(i, 3);
 					creditos = (int) tabla.getValueAt(i, 4);
 					semestre = (String) tabla.getValueAt(i, 5);
-					asignacion = new Asignacion(semestre, nombre, carne, cate, seccion, creditos, 0, 0, 0, false);
+					asignacion = new Asignacion(semestre,anio, nombre, carne, cate, seccion, creditos, 0, 0, 0, false);
 					ListaAsignacionCurso.ingresarAsignacion(asignacion);
 				}
 				JOptionPane.showMessageDialog(null, "Asignación Exitosa");
@@ -193,7 +205,6 @@ public class AsignacionCurso extends JDialog {
 		getContentPane().add(btnAsignar);
 
 		getContentPane().add(btnAgregar);
-
 	}
 
 	public void mostrarSeccion(String curso) {

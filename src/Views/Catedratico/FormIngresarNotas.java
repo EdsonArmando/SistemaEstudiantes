@@ -24,7 +24,7 @@ public class FormIngresarNotas extends JDialog  {
 	private JTextField idExamen;
 	private JTextField idTotal;
 	ListaAsignacionCurso ingresarNota = new ListaAsignacionCurso();
-	public FormIngresarNotas(int carne) {
+	public FormIngresarNotas(int carne,String curso) {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 		
@@ -100,7 +100,7 @@ public class FormIngresarNotas extends JDialog  {
 				int zona=Integer.parseInt(idZona.getText());
 				int examen = Integer.parseInt(idExamen.getText());
 				int total = zona+examen;
-				ListaAsignacionCurso.ingresarNota(carne, zona, examen, total);
+				ListaAsignacionCurso.ingresarNota(carne, zona, examen, total,curso);
 			}
 		});
 		btnAceptar.setBounds(204, 197, 89, 23);

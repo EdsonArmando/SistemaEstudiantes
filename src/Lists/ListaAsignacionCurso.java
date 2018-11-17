@@ -32,10 +32,10 @@ public class ListaAsignacionCurso {
 			puntero = puntero.siguiente;
 		}
 	}
-	public static void ingresarNota(int carne,int zona,int examen,int total){
+	public static void ingresarNota(int carne,int zona,int examen,int total,String curso){
 		NodoAsignacion puntero=primero;
 		while(puntero != null){
-			if(puntero.getAsignacion().getCarne()==carne){
+			if(puntero.getAsignacion().getCarne()==carne&&puntero.getAsignacion().getCurso().equals(curso)){
 				puntero.getAsignacion().setExamen(examen);
 				puntero.getAsignacion().setZona(zona);
 				puntero.getAsignacion().setNotaTotal(total);
