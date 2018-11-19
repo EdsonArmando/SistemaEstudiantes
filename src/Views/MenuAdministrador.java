@@ -2,6 +2,7 @@ package Views;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
@@ -31,6 +32,7 @@ import Views.Estudiante.ListadoEstudiantes;
 import Views.Semestre.FormularioCrear;
 import Views.Semestre.ListaSsemestres;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
@@ -48,7 +50,8 @@ public class MenuAdministrador extends JDialog {
 	AdministrarEstudiantes adminEstudiantes = new AdministrarEstudiantes();
 	FormularioCatedratico formCatedratico = new FormularioCatedratico();
 	JDialog dialogMaster;
-
+	static int anios=0;
+	static String nombres=null;
 	public MenuAdministrador() {
 		getContentPane().setEnabled(false);
 		setSize(450, 400);
@@ -112,7 +115,7 @@ public class MenuAdministrador extends JDialog {
 
 		JButton btnNewButton_1 = new JButton("CargaMasiva");
 		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {			
 				String aux = "";
 				String texto = "";
 				JFileChooser chooser = new JFileChooser("CargaMasiva");
@@ -144,6 +147,7 @@ public class MenuAdministrador extends JDialog {
 						}
 				         leerLineas(texto);
 				}
+
 			}
 		});
 		btnNewButton_1.setBounds(37, 296, 102, 23);
@@ -366,6 +370,12 @@ public class MenuAdministrador extends JDialog {
 		dialogMaster.setVisible(true);
 	}
 	static void leerLineas(String superTexto) {
+		JDialog uno = new JDialog();
+		uno.setLayout(null);
+		uno.setBounds(100, 100, 450, 300);
+		JTextPane idMensajes = new JTextPane();
+		idMensajes.setBounds(10, 11, 312, 239);
+		JButton btnLimpiar = new JButton("Limpiar");	
 		ListaEstudiante lista = new ListaEstudiante();
 		ListaCatedratico lista2 = new ListaCatedratico();
 		ListaSemestre lista3 = new ListaSemestre();
@@ -383,19 +393,42 @@ public class MenuAdministrador extends JDialog {
 					nombre = Clave_Valor[2];
 					correo = Clave_Valor[3];
 					creditos = Clave_Valor[4];
-					Estudiante estudiante = new Estudiante(Integer.parseInt(carne),identificador,nombre,correo,Integer.parseInt(creditos),Integer.parseInt(contrasenia(carne,identificador)));
-					ListaEstudiante.insertarEstudiante(estudiante);
+					if(carne.length()!=9){
+						String text = idMensajes.getText();
+						idMensajes.setText(text+"\n"+"Estudiante No Cargado: " +nombre+" "+carne);	
+						idMensajes.setForeground(Color.red);
+					}else{
+						Estudiante estudiante = new Estudiante(Integer.parseInt(carne),identificador,nombre,correo,Integer.parseInt(creditos),Integer.parseInt(contrasenia(carne,identificador)));
+						ListaEstudiante.insertarEstudiante(estudiante);
+						String text = idMensajes.getText();
+							idMensajes.setText("Estudiante Cargado: " +carne+" "+nombre+" \n"+text);
+							idMensajes.setForeground(Color.green);
+					}
 				}else if(Clave_Valor.length == 3){
 					identificador = Clave_Valor[0];
 					nombre = Clave_Valor[1];
 					correo = Clave_Valor[2];
 					Catedratico catedratico = new Catedratico(identificador,nombre,correo,contraseniaCate(identificador,nombre));
 					ListaCatedratico.ingresarCatedratico(catedratico);
+					String text = idMensajes.getText();
+					idMensajes.setText("Catedratico Cargado: " +identificador+" "+nombre+" \n"+text);
+					idMensajes.setForeground(Color.green);
 				}else if(Clave_Valor.length == 2){
 					nombre = Clave_Valor[0];
 					anio = Clave_Valor[1];
-					Semestre semestre = new Semestre(nombre,Integer.parseInt(anio));
-					ListaSemestre.insertarSemestre(semestre);
+					if(nombre.equals(nombres) && Integer.parseInt(anio) ==anios){
+						String text = idMensajes.getText();
+						idMensajes.setText(text+"\n"+"Semestre No Cargado: " +nombres+" "+anios);	
+					}else{
+						Semestre semestre = new Semestre(nombre,Integer.parseInt(anio));
+						ListaSemestre.insertarSemestre(semestre);
+						String text = idMensajes.getText();
+						idMensajes.setText("Semestre Cargado: " +nombre+" "+anio+" \n"+text);
+						idMensajes.setForeground(Color.green);
+						nombres=nombre;
+						anios = Integer.parseInt(anio);
+						
+					}
 				}else if(Clave_Valor.length==7){
 					codigo = Integer.parseInt(Clave_Valor[0]);
 					nombre = Clave_Valor[1];
@@ -406,9 +439,22 @@ public class MenuAdministrador extends JDialog {
 					post = Clave_Valor[6];
 					Curso curso = new Curso(codigo,nombre,identificador,credito,seccion,pre,post);
 					ListaCurso.insertarCurso(curso);
+					String text = idMensajes.getText();
+					idMensajes.setText("Curso Cargado: " +codigo+" "+nombre+" "+identificador+" \n"+text);
+					idMensajes.setForeground(Color.green);
 				}
 			}
 		}
+		btnLimpiar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				idMensajes.setText("");
+			}
+		});
+		btnLimpiar.setBounds(335, 12, 89, 23);
+		uno.add(idMensajes);
+		uno.add(btnLimpiar);
+		uno.setVisible(true);
+		uno.setLocationRelativeTo(null);
 	}
 	private static String contraseniaCate(String cui, String nombre){
 		String contra = null;

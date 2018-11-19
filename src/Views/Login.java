@@ -39,6 +39,17 @@ public class Login {
 		Administrador admin = new Administrador("admin","admin","admin");
 		lista.agregarNodo(admin);
 		JButton boton1 = new JButton("About");
+		boton1.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Consola conso = new Consola();
+				conso.setVisible(true);
+				conso.setLocationRelativeTo(null);
+				conso.setResizable(false);
+			}
+			
+		});
 		JPanel panel4 = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JPanel panel2 = new JPanel();
 		ImageIcon logo = new ImageIcon("Image.jpg");
