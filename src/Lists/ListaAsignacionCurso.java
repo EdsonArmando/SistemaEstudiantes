@@ -35,7 +35,8 @@ public class ListaAsignacionCurso {
 	public static void ingresarNota(int carne,int zona,int examen,int total,String curso){
 		NodoAsignacion puntero=primero;
 		while(puntero != null){
-			if(puntero.getAsignacion().getCarne()==carne&&puntero.getAsignacion().getCurso().equals(curso)){
+			if(puntero.getAsignacion().getCarne()==carne&&puntero.getAsignacion().getCurso().equals(curso) && total<=100
+					&& zona<=75&& examen<=25){
 				puntero.getAsignacion().setExamen(examen);
 				puntero.getAsignacion().setZona(zona);
 				puntero.getAsignacion().setNotaTotal(total);
@@ -45,6 +46,8 @@ public class ListaAsignacionCurso {
 					puntero.getAsignacion().setAprobado(true);
 				}
 				JOptionPane.showMessageDialog(null, "Nota Ingresada correctamente");
+			}else{
+				JOptionPane.showMessageDialog(null, "La nota no debe ser mayor a 100 y zona debe ser menor a 75");
 			}
 			puntero = puntero.siguiente;
 		}

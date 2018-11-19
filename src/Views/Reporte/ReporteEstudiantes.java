@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import Lists.ListaAsignacionCurso;
+import Lists.ListaCatedratico;
 import Lists.ListaCurso;
 import Lists.ListaSemestre;
 import Nodes.NodoAsignacion;
@@ -30,6 +31,7 @@ import javax.swing.JComboBox;
 
 public class ReporteEstudiantes extends JDialog {
 	ListaAsignacionCurso listado = new ListaAsignacionCurso();
+	ListaCatedratico lista = new ListaCatedratico();
 	private NodoAsignacion primero = ListaAsignacionCurso.getPrimero();
 	private NodoCurso primeros = ListaCurso.getPrimero();
 	private NodoSemestre anterior = ListaSemestre.getAnterior();
@@ -183,7 +185,7 @@ public class ReporteEstudiantes extends JDialog {
 		while(puntero != null){
 			if(puntero.getAsignacion().getCurso().equals(curso) &&	puntero.getAsignacion().getSemestre().equals(semestre)
 					&& puntero.getAsignacion().getSeccion().equals(seccion)&&puntero.getAsignacion().getAnio()==anio){
-				nombre = puntero.getAsignacion().getCuiCatedratico();
+				nombre = ListaCatedratico.retornarNombre(puntero.getAsignacion().getCuiCatedratico());
 			}
 			puntero=puntero.siguiente;
 		}

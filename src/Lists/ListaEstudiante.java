@@ -138,11 +138,11 @@ public class ListaEstudiante {
 				if(actual.getEstudiante().getCarne()==carnet&&actual.getEstudiante().getContrasenia()==contra){
 					verdadero =true;
 			}
-			actual = actual.Anterior;
 			}catch( java.lang.NullPointerException ex){
 				JOptionPane.showMessageDialog(null, "No existe ningun estudiante");
 			}
-		}while(actual !=ultimo);
+			actual = actual.Anterior;
+		}while(actual !=null);
 		return verdadero;
 	}
 	public static String retornarNombre(int carne){
@@ -154,7 +154,7 @@ public class ListaEstudiante {
 				nombre = actual.getEstudiante().getNombre();
 			}
 			actual = actual.Anterior;
-		}while(actual !=ultimo);
+		}while(actual !=null);
 		return nombre;
 	}
 }

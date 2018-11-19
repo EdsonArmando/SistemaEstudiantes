@@ -88,4 +88,28 @@ public class ListaCatedratico {
 		}while(actual!=primero);
 		return verdadero;
 	}
+	public static boolean buscarCatedratico(String cui){
+		boolean registrado = false;
+		NodoCatedratico actual = new NodoCatedratico();
+		actual=primero;
+		do{
+			if(actual.getCatedratico().getCui().equals(cui)){
+				registrado = true;
+			}
+			actual = actual.siguiente;
+		}while(actual!=primero);
+		return registrado;
+	}
+	public static String retornarNombre(String cui){
+		String registrado = null;
+		NodoCatedratico actual = new NodoCatedratico();
+		actual=primero;
+		do{
+			if(actual.getCatedratico().getCui().equals(cui)){
+				registrado = actual.getCatedratico().getNombre();
+			}
+			actual = actual.siguiente;
+		}while(actual!=primero);
+		return registrado;
+	}
 }

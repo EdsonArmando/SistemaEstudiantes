@@ -46,7 +46,8 @@ public class AsignacionCurso extends JDialog {
 	String codigos;
 	JComboBox idCurso = new JComboBox();
 	JComboBox idSeccion = new JComboBox();
-
+	int creditos = 0;
+	int credito=0;
 	public AsignacionCurso(int carne) {
 		DefaultTableModel modelo = new DefaultTableModel();
 		modelo.addColumn("No");
@@ -67,7 +68,11 @@ public class AsignacionCurso extends JDialog {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 1) {
+					int row = tabla.getSelectedRow();
+					Object carnes = tabla.getValueAt(row, 4);
+					credito = (Integer)carnes;
 					modelo.removeRow(tabla.getSelectedRow());
+					creditos = creditos -credito;
 					cont--;
 				}
 			}
@@ -110,7 +115,7 @@ public class AsignacionCurso extends JDialog {
 		btnSalir.setBounds(406, 239, 89, 23);
 		getContentPane().add(btnSalir);
 		JComboBox idAnio = new JComboBox();
-		idAnio.setBounds(115, 97, 43, 20);
+		idAnio.setBounds(115, 97, 83, 20);
 		getContentPane().add(idAnio);
 
 		JComboBox idSemestre = new JComboBox();
@@ -149,14 +154,12 @@ public class AsignacionCurso extends JDialog {
 			}
 
 		});
-		idCurso.setBounds(185, 97, 95, 20);
+		idCurso.setBounds(208, 97, 95, 20);
 		getContentPane().add(idCurso);
-		idSeccion.setBounds(290, 97, 70, 20);
+		idSeccion.setBounds(313, 97, 70, 20);
 		getContentPane().add(idSeccion);
 		JButton btnAgregar = new JButton("Agregar");
 		btnAgregar.addActionListener(new ActionListener() {
-			int creditos = 0;
-
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < tabla.getRowCount(); i++) {
 					creditos += (int) tabla.getValueAt(i, 4);

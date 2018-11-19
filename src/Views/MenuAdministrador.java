@@ -119,7 +119,7 @@ public class MenuAdministrador extends JDialog {
 				String aux = "";
 				String texto = "";
 				JFileChooser chooser = new JFileChooser("CargaMasiva");
-				FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF Images", "jpg", "gif", "swag",
+				FileNameExtensionFilter filter = new FileNameExtensionFilter(  "swag",
 						"SWAG");
 				chooser.setFileFilter(filter);
 				int returnVal = chooser.showOpenDialog(getContentPane());
@@ -383,6 +383,7 @@ public class MenuAdministrador extends JDialog {
 		String nombre = null, identificador = null, carne = null, creditos = null, correo = null,anio=null;
 		String  seccion=null,pre=null,post=null;
 		int credito=0,codigo=0;
+		String names = null, cuiRepe=null;
 		String lineas[] = superTexto.split("\n");
 		for (String linea : lineas) {
 			if (linea != "") {
@@ -393,9 +394,13 @@ public class MenuAdministrador extends JDialog {
 					nombre = Clave_Valor[2];
 					correo = Clave_Valor[3];
 					creditos = Clave_Valor[4];
-					if(carne.length()!=9){
+					if(carne.length()!=9 ||identificador.length()!=13){
 						String text = idMensajes.getText();
-						idMensajes.setText(text+"\n"+"Estudiante No Cargado: " +nombre+" "+carne);	
+						idMensajes.setText(text+"\n"+"Estudiante No Cargado: " +nombre+" "+carne+ " Carne o CUI erroneo");	
+						idMensajes.setForeground(Color.red);
+					}else if(carne.equals(names)){
+						String text = idMensajes.getText();
+						idMensajes.setText(text+"\n"+"Estudiante No Cargado: " +nombre+" "+carne+ " Repetido");	
 						idMensajes.setForeground(Color.red);
 					}else{
 						Estudiante estudiante = new Estudiante(Integer.parseInt(carne),identificador,nombre,correo,Integer.parseInt(creditos),Integer.parseInt(contrasenia(carne,identificador)));
@@ -403,22 +408,34 @@ public class MenuAdministrador extends JDialog {
 						String text = idMensajes.getText();
 							idMensajes.setText("Estudiante Cargado: " +carne+" "+nombre+" \n"+text);
 							idMensajes.setForeground(Color.green);
+							names = carne;
 					}
 				}else if(Clave_Valor.length == 3){
 					identificador = Clave_Valor[0];
 					nombre = Clave_Valor[1];
 					correo = Clave_Valor[2];
-					Catedratico catedratico = new Catedratico(identificador,nombre,correo,contraseniaCate(identificador,nombre));
-					ListaCatedratico.ingresarCatedratico(catedratico);
-					String text = idMensajes.getText();
-					idMensajes.setText("Catedratico Cargado: " +identificador+" "+nombre+" \n"+text);
-					idMensajes.setForeground(Color.green);
+					if(identificador.length()!=13){
+						String text = idMensajes.getText();
+						idMensajes.setText(text+"\n"+"Catedrático No Cargado: " +nombre+" "+identificador+ "CUI erroneo");	
+						idMensajes.setForeground(Color.red);
+					}else if(identificador.equals(cuiRepe)){
+						String text = idMensajes.getText();
+						idMensajes.setText(text+"\n"+"Catedrático No Cargado: " +nombre+" "+identificador+ " Repetido");	
+						idMensajes.setForeground(Color.red);
+					}else{
+						Catedratico catedratico = new Catedratico(identificador,nombre,correo,contraseniaCate(identificador,nombre));
+						ListaCatedratico.ingresarCatedratico(catedratico);
+						String text = idMensajes.getText();
+						idMensajes.setText("Catedratico Cargado: " +identificador+" "+nombre+" \n"+text);
+						idMensajes.setForeground(Color.green);
+						cuiRepe = identificador;
+					}
 				}else if(Clave_Valor.length == 2){
 					nombre = Clave_Valor[0];
 					anio = Clave_Valor[1];
 					if(nombre.equals(nombres) && Integer.parseInt(anio) ==anios){
 						String text = idMensajes.getText();
-						idMensajes.setText(text+"\n"+"Semestre No Cargado: " +nombres+" "+anios);	
+						idMensajes.setText(text+"\n"+"Semestre No Cargado: " +nombres+" "+anios+ " Repetido");	
 					}else{
 						Semestre semestre = new Semestre(nombre,Integer.parseInt(anio));
 						ListaSemestre.insertarSemestre(semestre);
@@ -437,11 +454,18 @@ public class MenuAdministrador extends JDialog {
 					seccion = Clave_Valor[4];
 					pre = Clave_Valor[5];
 					post = Clave_Valor[6];
-					Curso curso = new Curso(codigo,nombre,identificador,credito,seccion,pre,post);
-					ListaCurso.insertarCurso(curso);
-					String text = idMensajes.getText();
-					idMensajes.setText("Curso Cargado: " +codigo+" "+nombre+" "+identificador+" \n"+text);
-					idMensajes.setForeground(Color.green);
+					boolean registrado = ListaCatedratico.buscarCatedratico(identificador);
+					if(registrado == true){
+						Curso curso = new Curso(codigo,nombre,identificador,credito,seccion,pre,post);
+						ListaCurso.insertarCurso(curso);
+						String text = idMensajes.getText();
+						idMensajes.setText("Curso Cargado: " +codigo+" "+nombre+" "+identificador+" \n"+text);
+						idMensajes.setForeground(Color.green);
+					}else{
+						String text = idMensajes.getText();
+						idMensajes.setText(text+"\n"+"Curso No Cargado: " +codigo+" "+nombre+" "+identificador+" Catedrático no existe");
+						
+					}
 				}
 			}
 		}
@@ -450,7 +474,7 @@ public class MenuAdministrador extends JDialog {
 				idMensajes.setText("");
 			}
 		});
-		btnLimpiar.setBounds(335, 12, 89, 23);
+		btnLimpiar.setBounds(335, 12, 89, 75);
 		uno.add(idMensajes);
 		uno.add(btnLimpiar);
 		uno.setVisible(true);

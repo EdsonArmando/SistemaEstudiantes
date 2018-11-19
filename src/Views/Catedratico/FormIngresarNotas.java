@@ -11,10 +11,13 @@ import javax.swing.border.EmptyBorder;
 import Lists.ListaAsignacionCurso;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.SystemColor;
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
@@ -51,6 +54,20 @@ public class FormIngresarNotas extends JDialog  {
 		idExamen.setBounds(66, 137, 86, 20);
 		getContentPane().add(idExamen);
 		idExamen.setColumns(10);
+		idExamen.addMouseListener(new MouseAdapter(){
+
+			@Override
+			public void mousePressed(MouseEvent  ev) {
+				int nota = Integer.parseInt(idZona.getText());
+				if(nota <36){
+					idExamen.setEnabled(false);
+					idExamen.setText("0");
+				}else if(nota >=36 && nota<=75){
+					idExamen.setEnabled(true);
+				}
+			}
+			
+		});
 		
 		JLabel lblTotal = new JLabel("Total:");
 		lblTotal.setBounds(10, 201, 46, 14);
@@ -100,7 +117,11 @@ public class FormIngresarNotas extends JDialog  {
 				int zona=Integer.parseInt(idZona.getText());
 				int examen = Integer.parseInt(idExamen.getText());
 				int total = zona+examen;
-				ListaAsignacionCurso.ingresarNota(carne, zona, examen, total,curso);
+				if(examen>25){
+					JOptionPane.showMessageDialog(null, "El examen no debe exeder los 25 pts");
+				}else{
+					ListaAsignacionCurso.ingresarNota(carne, zona, examen, total,curso);
+				}
 			}
 		});
 		btnAceptar.setBounds(204, 197, 89, 23);
